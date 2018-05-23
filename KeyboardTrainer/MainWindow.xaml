@@ -5,8 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboardTrainer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Keyboard trainer" Height="450" Width="645" MinWidth="620">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Dictionary1.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.Resources>
+			<Style TargetType="TextBlock">
+				<Setter Property="FontSize" Value="16"/>
+				<Setter Property="Foreground" Value="Black"/>
+			</Style>
+			<Style BasedOn="{StaticResource {x:Type TextBlock}}" x:Key="statisticValue" TargetType="TextBlock">
+				<Setter Property="FontWeight" Value="Bold"/>
+			</Style>
+		</Grid.Resources>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="1*"/>
+		</Grid.RowDefinitions>
+		<Grid VerticalAlignment="Center" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition MinWidth="180"/>
+				<ColumnDefinition MinWidth="75"/>
+				<ColumnDefinition Width="auto"  MinWidth="340"/>
+			</Grid.ColumnDefinitions>
+			<Grid HorizontalAlignment="Center" Grid.Column="0">
+				<Border Padding="10 3" BorderThickness="3" CornerRadius="10" BorderBrush="#FF299723" Background="#FF9BFFB6">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Speed : "></TextBlock>
+						<TextBlock Name="tblSpeed" Style="{StaticResource statisticValue}">118</TextBlock>
+						<TextBlock Text=" chars\min"></TextBlock>
+					</StackPanel>
+				</Border>
+			</Grid>
+			<Grid HorizontalAlignment="Center" Grid.Column="1">
+				<Border Padding="10 3" BorderThickness="3" CornerRadius="10" BorderBrush="#FFE05648" Background="#FFFFA299" >
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Fails : "></TextBlock>
+						<TextBlock Name="tblFails" Style="{StaticResource statisticValue}">3</TextBlock>
+					</StackPanel>
+				</Border>
+			</Grid>
+			<Grid HorizontalAlignment="Center" Grid.Column="2">
+				<Border Padding="10 3" BorderThickness="3" CornerRadius="10" BorderBrush="#FFFFAE00" Background="#FFFFF699" >
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Difficulty : "></TextBlock>
+						<TextBlock Name="tblDifficulty" Style="{StaticResource statisticValue}">1</TextBlock>
+						<Slider Minimum="1" Maximum="5" Value="2" Width="100" Margin="10 0" BorderBrush="#FFE05648" OpacityMask="#FFFD4040" Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=BorderBrush}"/>
+						<CheckBox VerticalAlignment="Center" Margin="10 0" Background="White" BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=BorderBrush}">Case Sensitive</CheckBox>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Grid>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Button FontSize="16" Margin="5" Background="#FF9BFFB6" Padding="5" Grid.Row="0">Start</Button>
+				<Button FontSize="16" Margin="5" Background="#FFFFA299" Padding="5" Grid.Row="1">Stop</Button>
+			</Grid>
+			<Border Grid.Column="1" BorderThickness="3" CornerRadius="10" BorderBrush="#FF6E6E6E" Padding="10 3">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<TextBlock Padding="5" Background="#FFEEEEEE" Grid.Column="1" Grid.Row="0">asdf</TextBlock>
+					<TextBlock Padding="5" Grid.Column="1" Grid.Row="1">asdf</TextBlock>
+				</Grid>
+			</Border>
+		</Grid>
+		<Grid Grid.Row="2" Background="#FFD9FFE0">
+			
+		</Grid>
+	</Grid>
 </Window>
