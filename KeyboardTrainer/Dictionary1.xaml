@@ -3,16 +3,41 @@
                     xmlns:local="clr-namespace:KeyboardTrainer">
 	<!--Buttons-->
 	<ControlTemplate x:Key="btnTmpl" TargetType="Button">
-		<Border Padding="{TemplateBinding Padding}" CornerRadius="10" BorderThickness="3" Background="{TemplateBinding Background}" BorderBrush="Black">
+		<Border Padding="{TemplateBinding Padding}" CornerRadius="7" BorderThickness="2" Background="{TemplateBinding Background}" BorderBrush="Black" Margin="2">
 			<Grid>
-				<TextBlock Foreground="Black" TextAlignment="Center" VerticalAlignment="Center">
+				<TextBlock Foreground="Black" TextAlignment="Center" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}">
 					 <ContentPresenter></ContentPresenter>
 				</TextBlock>
 			</Grid>
 		</Border>
 	</ControlTemplate>	
-	<Style TargetType="Button">
-		<Setter Property="Template" Value="{StaticResource btnTmpl}"/>		
+	<Style x:Key="baseButton" TargetType="Button">
+		<Setter Property="Template" Value="{DynamicResource btnTmpl}"/>
+		<Setter Property="FontSize" Value="24"/>
+	</Style>
+	<!--Button Style-->
+	<Style x:Key="btnColGray" TargetType="Button" BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FF9C9C9C"/>
+		<Setter Property="FontSize" Value="16"/>		
+	</Style>
+	<Style x:Key="btnColRed" TargetType="Button" BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FFFF8C8C"/>
+	</Style>
+	<Style x:Key="btnColYellow" TargetType="Button"  BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FFF7F056"/>
+	</Style>
+	<Style x:Key="btnColGreen" TargetType="Button" BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FF96F987"/>
+	</Style>
+	<Style x:Key="btnColBlue" TargetType="Button" BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FF5FC1F0"/>
+	</Style>
+	<Style x:Key="btnColPurple" TargetType="Button" BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FFF885FD"/>
+	</Style>
+	<Style x:Key="btnColBrown" TargetType="Button" BasedOn="{DynamicResource baseButton}">
+		<Setter Property="Background" Value="#FFA4734A"/>
+		<Setter Property="FontSize" Value="16"/>
 	</Style>
 	
 	<!--Slider-->

@@ -23,6 +23,9 @@ namespace KeyboardTrainer
 		public MainWindow()
 		{
 			InitializeComponent();
+			
 		}
+
+		
 	}
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboardTrainer"
         mc:Ignorable="d"
-        Title="Keyboard trainer" Height="450" Width="645" MinWidth="620">
+        Title="Keyboard trainer" Height="388" Width="224" MinWidth="620">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -14,7 +14,7 @@
 		</ResourceDictionary>
 	</Window.Resources>
 
-	<Grid>
+	<Grid Background="Moccasin">
 		<Grid.Resources>
 			<Style TargetType="TextBlock">
 				<Setter Property="FontSize" Value="16"/>
@@ -73,8 +73,8 @@
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Button FontSize="16" Margin="5" Background="#FF9BFFB6" Padding="5" Grid.Row="0">Start</Button>
-				<Button FontSize="16" Margin="5" Background="#FFFFA299" Padding="5" Grid.Row="1">Stop</Button>
+				<Button Style="{DynamicResource btnColGreen}" FontSize="16" Margin="5" Background="#FF9BFFB6" Padding="5" Grid.Row="0">Start</Button>
+				<Button Style="{DynamicResource btnColRed}" FontSize="16" Margin="5" Background="#FFFFA299" Padding="5" Grid.Row="1">Stop</Button>
 			</Grid>
 			<Border Grid.Column="1" BorderThickness="3" CornerRadius="10" BorderBrush="#FF6E6E6E" Padding="10 3">
 				<Grid>
@@ -88,7 +88,154 @@
 			</Border>
 		</Grid>
 		<Grid Grid.Row="2" Background="#FFD9FFE0">
-			
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Style="{DynamicResource btnColRed}">`</Button>
+				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">1</Button>
+				<Button Grid.Column="2" Style="{DynamicResource btnColRed}">2</Button>
+				<Button Grid.Column="3" Style="{DynamicResource btnColYellow}">3</Button>
+				<Button Grid.Column="4" Style="{DynamicResource btnColGreen}">4</Button>
+				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">5</Button>
+				<Button Grid.Column="6" Style="{DynamicResource btnColBlue}">6</Button>
+				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">7</Button>
+				<Button Grid.Column="8" Style="{DynamicResource btnColPurple}">8</Button>
+				<Button Grid.Column="9" Style="{DynamicResource btnColRed}">9</Button>
+				<Button Grid.Column="10" Style="{DynamicResource btnColYellow}">0</Button>
+				<Button Grid.Column="11" Style="{DynamicResource btnColGreen}">-</Button>
+				<Button Grid.Column="12" Style="{DynamicResource btnColGreen}">=</Button>
+				<Button Grid.Column="13" Style="{DynamicResource btnColGray}">Backspace</Button>
+			</Grid>
+			<Grid Grid.Row="1">
+					<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1.5*"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="1.5*"/>
+					</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Tab</Button>
+				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">q</Button>
+				<Button Grid.Column="2" Style="{DynamicResource btnColYellow}">w</Button>
+				<Button Grid.Column="3" Style="{DynamicResource btnColGreen}">e</Button>
+				<Button Grid.Column="4" Style="{DynamicResource btnColBlue}">r</Button>
+				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">t</Button>
+				<Button Grid.Column="6" Style="{DynamicResource btnColPurple}">y</Button>
+				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">u</Button>
+				<Button Grid.Column="8" Style="{DynamicResource btnColRed}">i</Button>
+				<Button Grid.Column="9" Style="{DynamicResource btnColYellow}">o</Button>
+				<Button Grid.Column="10" Style="{DynamicResource btnColGreen}">p</Button>
+				<Button Grid.Column="11" Style="{DynamicResource btnColGreen}">[</Button>
+				<Button Grid.Column="12" Style="{DynamicResource btnColGreen}">]</Button>
+				<Button Grid.Column="13" Style="{DynamicResource btnColGreen}">\</Button>
+			</Grid>
+			<Grid Grid.Row="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*"/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>					
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Caps Lock</Button>
+				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">a</Button>
+				<Button Grid.Column="2" Style="{DynamicResource btnColYellow}">s</Button>
+				<Button Grid.Column="3" Style="{DynamicResource btnColGreen}">d</Button>
+				<Button Grid.Column="4" Style="{DynamicResource btnColBlue}">f</Button>
+				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">g</Button>
+				<Button Grid.Column="6" Style="{DynamicResource btnColPurple}">h</Button>
+				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">j</Button>
+				<Button Grid.Column="8" Style="{DynamicResource btnColRed}">k</Button>
+				<Button Grid.Column="9" Style="{DynamicResource btnColYellow}">l</Button>
+				<Button Grid.Column="10" Style="{DynamicResource btnColGreen}">;</Button>
+				<Button Grid.Column="11" Style="{DynamicResource btnColGreen}">'</Button>
+				<Button Grid.Column="12" Style="{DynamicResource btnColGray}">Enter</Button>
+			</Grid>
+			<Grid Grid.Row="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2.5*"/>					
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="2.5*"/>
+				</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Shift</Button>
+				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">z</Button>
+				<Button Grid.Column="2" Style="{DynamicResource btnColYellow}">x</Button>
+				<Button Grid.Column="3" Style="{DynamicResource btnColGreen}">c</Button>
+				<Button Grid.Column="4" Style="{DynamicResource btnColBlue}">v</Button>
+				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">b</Button>
+				<Button Grid.Column="6" Style="{DynamicResource btnColPurple}">n</Button>
+				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">m</Button>
+				<Button Grid.Column="8" Style="{DynamicResource btnColRed}">,</Button>
+				<Button Grid.Column="9" Style="{DynamicResource btnColYellow}">.</Button>
+				<Button Grid.Column="10" Style="{DynamicResource btnColGreen}">/</Button>
+				<Button Grid.Column="12" Style="{DynamicResource btnColGray}">Shift</Button>
+			</Grid>
+			<Grid Grid.Row="4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="6*"/>
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="1.5*"/>
+				</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Ctrl</Button>
+				<Button Grid.Column="1" Style="{DynamicResource btnColGray}">Win</Button>
+				<Button Grid.Column="2" Style="{DynamicResource btnColGray}">Alt</Button>
+				<Button Grid.Column="3" Style="{DynamicResource btnColBrown}">Space</Button>
+				<Button Grid.Column="4" Style="{DynamicResource btnColGray}">Alt</Button>
+				<Button Grid.Column="5" Style="{DynamicResource btnColGray}">Win</Button>
+				<Button Grid.Column="6" Style="{DynamicResource btnColGray}">Ctrl</Button>
+			</Grid>
 		</Grid>
-	</Grid>
+		</Grid>
+	
 </Window>
