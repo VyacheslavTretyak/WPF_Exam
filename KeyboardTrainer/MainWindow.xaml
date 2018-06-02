@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboardTrainer"
-        mc:Ignorable="d"
-        Title="Keyboard trainer" Height="388" Width="224" MinWidth="620">
+        mc:Ignorable="d"	
+		Name="mainWindow"
+        Title="Keyboard trainer" Height="388" Width="640" MinWidth="640" MinHeight="370" KeyDown="Button_KeyDown" KeyUp="Button_KeyUp">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Dictionary1.xaml"/>
+				<ResourceDictionary Source="KeyboardTrainerLib.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
+		</ResourceDictionary>		
 	</Window.Resources>
 
 	<Grid Background="Moccasin">
@@ -27,9 +28,9 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
-			<RowDefinition Height="1*"/>
+			<RowDefinition Height="3*"/>
 		</Grid.RowDefinitions>
-		<Grid VerticalAlignment="Center" Grid.Row="0">
+		<Grid VerticalAlignment="Center" Grid.Row="0" Margin="5">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition MinWidth="180"/>
 				<ColumnDefinition MinWidth="75"/>
@@ -39,7 +40,7 @@
 				<Border Padding="10 3" BorderThickness="3" CornerRadius="10" BorderBrush="#FF299723" Background="#FF9BFFB6">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Speed : "></TextBlock>
-						<TextBlock Name="tblSpeed" Style="{StaticResource statisticValue}">118</TextBlock>
+						<TextBlock Name="tblSpeed" Style="{StaticResource statisticValue}" Text="{Binding ElementName=mainWindow, Path=Speed}"></TextBlock>
 						<TextBlock Text=" chars\min"></TextBlock>
 					</StackPanel>
 				</Border>
@@ -48,7 +49,7 @@
 				<Border Padding="10 3" BorderThickness="3" CornerRadius="10" BorderBrush="#FFE05648" Background="#FFFFA299" >
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Fails : "></TextBlock>
-						<TextBlock Name="tblFails" Style="{StaticResource statisticValue}">3</TextBlock>
+						<TextBlock Name="tblFails" Style="{StaticResource statisticValue}" Text="{Binding ElementName=mainWindow, Path=Fails}"></TextBlock>
 					</StackPanel>
 				</Border>
 			</Grid>
@@ -56,38 +57,39 @@
 				<Border Padding="10 3" BorderThickness="3" CornerRadius="10" BorderBrush="#FFFFAE00" Background="#FFFFF699" >
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Difficulty : "></TextBlock>
-						<TextBlock Name="tblDifficulty" Style="{StaticResource statisticValue}">1</TextBlock>
-						<Slider Minimum="1" Maximum="5" Value="2" Width="100" Margin="10 0" BorderBrush="#FFE05648" OpacityMask="#FFFD4040" Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=BorderBrush}"/>
-						<CheckBox VerticalAlignment="Center" Margin="10 0" Background="White" BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=BorderBrush}">Case Sensitive</CheckBox>
+						<TextBlock Name="tblDifficulty" Style="{StaticResource statisticValue}" Text="{Binding ElementName=slider, Path=Value}"></TextBlock>
+						<Slider Name="slider" Minimum="1" Maximum="5" Value="2" TickFrequency="1" IsSnapToTickEnabled="True" Width="100" Margin="10 0" BorderBrush="#FFE05648" OpacityMask="#FFFD4040" Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=BorderBrush}"/>
+						<CheckBox Name="cbCaseSens" Focusable="False" VerticalAlignment="Center" Margin="10 0" Background="White" BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Border}}, Path=BorderBrush}">Case Sensitive</CheckBox>
 					</StackPanel>
 				</Border>
 			</Grid>
 		</Grid>
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="1"  MinHeight="100" Margin="0 5">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="5*"/>
 			</Grid.ColumnDefinitions>
 			<Grid Grid.Column="0">
 				<Grid.RowDefinitions>
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Button Style="{DynamicResource btnColGreen}" FontSize="16" Margin="5" Background="#FF9BFFB6" Padding="5" Grid.Row="0">Start</Button>
-				<Button Style="{DynamicResource btnColRed}" FontSize="16" Margin="5" Background="#FFFFA299" Padding="5" Grid.Row="1">Stop</Button>
+				<local:ButtonWithKey x:Name="btnStart" Style="{StaticResource btnColGreen}" Click="Start_Click" FontSize="16" Margin="5" Grid.Row="0" Content="Start"></local:ButtonWithKey>
+				<local:ButtonWithKey x:Name="btnStop" Style="{StaticResource btnColRed}" Click="Stop_Click" FontSize="16" Margin="5"   Grid.Row="1"  Content="Stop"></local:ButtonWithKey>
 			</Grid>
 			<Border Grid.Column="1" BorderThickness="3" CornerRadius="10" BorderBrush="#FF6E6E6E" Padding="10 3">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 						<RowDefinition/>
-					</Grid.RowDefinitions>
-					<TextBlock Padding="5" Background="#FFEEEEEE" Grid.Column="1" Grid.Row="0">asdf</TextBlock>
-					<TextBlock Padding="5" Grid.Column="1" Grid.Row="1">asdf</TextBlock>
+					</Grid.RowDefinitions>					
+					<TextBlock Name="tblLine" Padding="5" Background="#FFEEEEEE" Grid.Column="1" Grid.Row="0"></TextBlock>					
+					<TextBlock Name="tblInput" Padding="5" Grid.Column="1" Grid.Row="1"></TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
-		<Grid Grid.Row="2" Background="#FFD9FFE0">
+		<!--keyboard-->
+		<Grid Name="keyboard" Grid.Row="2" Background="#FFE2FFD7">
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 				<RowDefinition/>
@@ -112,20 +114,20 @@
 					<ColumnDefinition/>
 					<ColumnDefinition Width="2*"/>
 				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Style="{DynamicResource btnColRed}">`</Button>
-				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">1</Button>
-				<Button Grid.Column="2" Style="{DynamicResource btnColRed}">2</Button>
-				<Button Grid.Column="3" Style="{DynamicResource btnColYellow}">3</Button>
-				<Button Grid.Column="4" Style="{DynamicResource btnColGreen}">4</Button>
-				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">5</Button>
-				<Button Grid.Column="6" Style="{DynamicResource btnColBlue}">6</Button>
-				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">7</Button>
-				<Button Grid.Column="8" Style="{DynamicResource btnColPurple}">8</Button>
-				<Button Grid.Column="9" Style="{DynamicResource btnColRed}">9</Button>
-				<Button Grid.Column="10" Style="{DynamicResource btnColYellow}">0</Button>
-				<Button Grid.Column="11" Style="{DynamicResource btnColGreen}">-</Button>
-				<Button Grid.Column="12" Style="{DynamicResource btnColGreen}">=</Button>
-				<Button Grid.Column="13" Style="{DynamicResource btnColGray}">Backspace</Button>
+				<local:ButtonWithKey Grid.Column="0" Style="{StaticResource btnColRed}" Key="Oem3" Char="`" CharCaps="~">`</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="1" Style="{StaticResource btnColRed}" Key="D1" Char="1" CharCaps="!">1</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="2" Style="{StaticResource btnColRed}" Key="D2" Char="2" CharCaps="@">2</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="3" Style="{StaticResource btnColYellow}" Key="D3" Char="3" CharCaps="#">3</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="4" Style="{StaticResource btnColGreen}" Key="D4" Char="4" CharCaps="$">4</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="5" Style="{StaticResource btnColBlue}" Key="D5" Char="5" CharCaps="%">5</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="6" Style="{StaticResource btnColBlue}" Key="D6" Char="6" CharCaps="^">6</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="7" Style="{StaticResource btnColPurple}" Key="D7" Char="7" CharCaps="&amp;">7</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="8" Style="{StaticResource btnColPurple}" Key="D8" Char="8" CharCaps="*">8</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="9" Style="{StaticResource btnColRed}" Key="D9" Char="9" CharCaps="(">9</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="10" Style="{StaticResource btnColYellow}" Key="D0" Char="0" CharCaps=")">0</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="11" Style="{StaticResource btnColGreen}" Key="OemMinus" Char="-" CharCaps="_">-</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="12" Style="{StaticResource btnColGreen}" Key="OemPlus" Char="=" CharCaps="+">=</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="13" Style="{StaticResource btnColGray}" Key="Backspace" Char="Backspace">Backspace</local:ButtonWithKey>
 			</Grid>
 			<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
@@ -144,20 +146,20 @@
 						<ColumnDefinition/>
 						<ColumnDefinition Width="1.5*"/>
 					</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Tab</Button>
-				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">q</Button>
-				<Button Grid.Column="2" Style="{DynamicResource btnColYellow}">w</Button>
-				<Button Grid.Column="3" Style="{DynamicResource btnColGreen}">e</Button>
-				<Button Grid.Column="4" Style="{DynamicResource btnColBlue}">r</Button>
-				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">t</Button>
-				<Button Grid.Column="6" Style="{DynamicResource btnColPurple}">y</Button>
-				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">u</Button>
-				<Button Grid.Column="8" Style="{DynamicResource btnColRed}">i</Button>
-				<Button Grid.Column="9" Style="{DynamicResource btnColYellow}">o</Button>
-				<Button Grid.Column="10" Style="{DynamicResource btnColGreen}">p</Button>
-				<Button Grid.Column="11" Style="{DynamicResource btnColGreen}">[</Button>
-				<Button Grid.Column="12" Style="{DynamicResource btnColGreen}">]</Button>
-				<Button Grid.Column="13" Style="{DynamicResource btnColGreen}">\</Button>
+				<local:ButtonWithKey Grid.Column="0" Style="{StaticResource btnColGray}" Key="Tab" Char="Tab">Tab</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="1" Style="{StaticResource btnColRed}" Key="Q" Char="q" CharCaps="Q">q</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="2" Style="{StaticResource btnColYellow}" Key="W" Char="w" CharCaps="W">w</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="3" Style="{StaticResource btnColGreen}" Key="E" Char="e" CharCaps="E">e</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="4" Style="{StaticResource btnColBlue}" Key="R" Char="r" CharCaps="R">r</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="5" Style="{StaticResource btnColBlue}" Key="T" Char="t" CharCaps="T">t</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="6" Style="{StaticResource btnColPurple}" Key="Y" Char="y" CharCaps="Y">y</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="7" Style="{StaticResource btnColPurple}" Key="U" Char="u" CharCaps="U">u</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="8" Style="{StaticResource btnColRed}" Key="I" Char="i" CharCaps="I">i</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="9" Style="{StaticResource btnColYellow}" Key="O" Char="o" CharCaps="O">o</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="10" Style="{StaticResource btnColGreen}" Key="P" Char="p" CharCaps="P">p</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="11" Style="{StaticResource btnColGreen}" Key="OemOpenBrackets" Char="[" CharCaps="{}{">[</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="12" Style="{StaticResource btnColGreen}" Key="Oem6" Char="]" CharCaps="{}}">]</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="13" Style="{StaticResource btnColGreen}" Key="Oem5" Char="\" CharCaps="|">\</local:ButtonWithKey>
 			</Grid>
 			<Grid Grid.Row="2">
 				<Grid.ColumnDefinitions>
@@ -175,19 +177,19 @@
 					<ColumnDefinition/>					
 					<ColumnDefinition Width="2*"/>
 				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Caps Lock</Button>
-				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">a</Button>
-				<Button Grid.Column="2" Style="{DynamicResource btnColYellow}">s</Button>
-				<Button Grid.Column="3" Style="{DynamicResource btnColGreen}">d</Button>
-				<Button Grid.Column="4" Style="{DynamicResource btnColBlue}">f</Button>
-				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">g</Button>
-				<Button Grid.Column="6" Style="{DynamicResource btnColPurple}">h</Button>
-				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">j</Button>
-				<Button Grid.Column="8" Style="{DynamicResource btnColRed}">k</Button>
-				<Button Grid.Column="9" Style="{DynamicResource btnColYellow}">l</Button>
-				<Button Grid.Column="10" Style="{DynamicResource btnColGreen}">;</Button>
-				<Button Grid.Column="11" Style="{DynamicResource btnColGreen}">'</Button>
-				<Button Grid.Column="12" Style="{DynamicResource btnColGray}">Enter</Button>
+				<local:ButtonWithKey Grid.Column="0" Style="{StaticResource btnColGray}" Key ="Capital" Char="Caps Lock">Caps Lock</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="1" Style="{StaticResource btnColRed}" Key="A" Char="a" CharCaps="A">a</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="2" Style="{StaticResource btnColYellow}" Key="S" Char="s" CharCaps="S">s</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="3" Style="{StaticResource btnColGreen}" Key="D" Char="d" CharCaps="D">d</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="4" Style="{StaticResource btnColBlue}" Key="F" Char="f" CharCaps="F">f</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="5" Style="{StaticResource btnColBlue}" Key="G" Char="g" CharCaps="G">g</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="6" Style="{StaticResource btnColPurple}" Key="H" Char="h" CharCaps="H">h</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="7" Style="{StaticResource btnColPurple}" Key="J" Char="j" CharCaps="J">j</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="8" Style="{StaticResource btnColRed}" Key="K" Char="k" CharCaps="K">k</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="9" Style="{StaticResource btnColYellow}" Key="L" Char="l" CharCaps="L">l</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="10" Style="{StaticResource btnColGreen}" Key="Oem1" Char=";" CharCaps=":">;</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="11" Style="{StaticResource btnColGreen}" Key="OemQuotes" Char="'" CharCaps="&quot;">'</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="12" Style="{StaticResource btnColGray}" Key="Return" Char="Enter">Enter</local:ButtonWithKey>
 			</Grid>
 			<Grid Grid.Row="3">
 				<Grid.ColumnDefinitions>
@@ -204,18 +206,18 @@
 					<ColumnDefinition/>
 					<ColumnDefinition Width="2.5*"/>
 				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Shift</Button>
-				<Button Grid.Column="1" Style="{DynamicResource btnColRed}">z</Button>
-				<Button Grid.Column="2" Style="{DynamicResource btnColYellow}">x</Button>
-				<Button Grid.Column="3" Style="{DynamicResource btnColGreen}">c</Button>
-				<Button Grid.Column="4" Style="{DynamicResource btnColBlue}">v</Button>
-				<Button Grid.Column="5" Style="{DynamicResource btnColBlue}">b</Button>
-				<Button Grid.Column="6" Style="{DynamicResource btnColPurple}">n</Button>
-				<Button Grid.Column="7" Style="{DynamicResource btnColPurple}">m</Button>
-				<Button Grid.Column="8" Style="{DynamicResource btnColRed}">,</Button>
-				<Button Grid.Column="9" Style="{DynamicResource btnColYellow}">.</Button>
-				<Button Grid.Column="10" Style="{DynamicResource btnColGreen}">/</Button>
-				<Button Grid.Column="12" Style="{DynamicResource btnColGray}">Shift</Button>
+				<local:ButtonWithKey Grid.Column="0" Style="{StaticResource btnColGray}" Key="LeftShift" Char="Shift">Shift</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="1" Style="{StaticResource btnColRed}" Key="Z" Char="z" CharCaps="Z">z</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="2" Style="{StaticResource btnColYellow}" Key="X" Char="x" CharCaps="X">x</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="3" Style="{StaticResource btnColGreen}" Key="C" Char="c" CharCaps="C">c</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="4" Style="{StaticResource btnColBlue}" Key="V" Char="v" CharCaps="V">v</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="5" Style="{StaticResource btnColBlue}" Key="B" Char="b" CharCaps="B">b</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="6" Style="{StaticResource btnColPurple}" Key="N" Char="n" CharCaps="N">n</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="7" Style="{StaticResource btnColPurple}" Key="M" Char="m" CharCaps="M">m</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="8" Style="{StaticResource btnColRed}" Key="OemComma" Char="," CharCaps="&lt;">,</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="9" Style="{StaticResource btnColYellow}" Key="OemPeriod" Char="." CharCaps="&gt;">.</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="10" Style="{StaticResource btnColGreen}" Key="OemQuestion" Char="/" CharCaps="?">/</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="12" Style="{StaticResource btnColGray}" Key="RightShift" Char="Shift">Shift</local:ButtonWithKey>
 			</Grid>
 			<Grid Grid.Row="4">
 				<Grid.ColumnDefinitions>
@@ -227,15 +229,14 @@
 					<ColumnDefinition Width="1.5*"/>
 					<ColumnDefinition Width="1.5*"/>
 				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Style="{DynamicResource btnColGray}">Ctrl</Button>
-				<Button Grid.Column="1" Style="{DynamicResource btnColGray}">Win</Button>
-				<Button Grid.Column="2" Style="{DynamicResource btnColGray}">Alt</Button>
-				<Button Grid.Column="3" Style="{DynamicResource btnColBrown}">Space</Button>
-				<Button Grid.Column="4" Style="{DynamicResource btnColGray}">Alt</Button>
-				<Button Grid.Column="5" Style="{DynamicResource btnColGray}">Win</Button>
-				<Button Grid.Column="6" Style="{DynamicResource btnColGray}">Ctrl</Button>
+				<local:ButtonWithKey Grid.Column="0" Style="{StaticResource btnColGray}" Key="LeftCtrl" Char="Ctrl">Ctrl</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="1" Style="{StaticResource btnColGray}" Key="LWin" Char="Win">Win</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="2" Style="{StaticResource btnColGray}" Key="LeftAlt" Char="Alt">Alt</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="3" Style="{StaticResource btnColBrown}" Key="Space" Char="Space">Space</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="4" Style="{StaticResource btnColGray}" Key="RightAlt" Char="Alt">Alt</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="5" Style="{StaticResource btnColGray}" Key="RWin" Char="Win">Win</local:ButtonWithKey>
+				<local:ButtonWithKey Grid.Column="6" Style="{StaticResource btnColGray}" Key="RightCtrl" Char="Ctrl">Ctrl</local:ButtonWithKey>
 			</Grid>
 		</Grid>
-		</Grid>
-	
+		</Grid>	
 </Window>
